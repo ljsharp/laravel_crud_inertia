@@ -21,5 +21,5 @@ mix.js('resources/js/app.js', 'public/js').vue()
 if (mix.inProduction()) {
     mix.version();
 }
-
-mix.disableNotification();
+mix.version();
+mix.disableNotifications();
