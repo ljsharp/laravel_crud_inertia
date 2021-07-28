@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\HasCan;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,6 +19,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasCan;
 
     /**
      * The attributes that are mass assignable.
@@ -57,5 +60,21 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        'can',
     ];
+
+    public function getCreatedAtAttribute($value)
+    {
+        return now()->parse($value)->timezone(config('app.timezone'))->format('d M, Y - H:m:s');
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return now()->parse($value)->timezone(config('app.timezone'))->format('d M, Y - H:m:s');
+    }
+
+    public function checkRole($role)
+    {
+        return $this->role === $role;
+    }
 }
