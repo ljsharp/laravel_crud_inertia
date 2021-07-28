@@ -73,8 +73,13 @@ class User extends Authenticatable
         return now()->parse($value)->timezone(config('app.timezone'))->format('d M, Y - H:m:s');
     }
 
-    public function checkRole($role)
+    public function hasRole($role)
     {
         return $this->role === $role;
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 }

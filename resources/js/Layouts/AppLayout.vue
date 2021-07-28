@@ -25,6 +25,9 @@
                                 <jet-nav-link :href="route('users.index')" :active="route().current('users.index')" v-if="$page.props.permission.users.viewAny">
                                     Users
                                 </jet-nav-link>
+                                <jet-nav-link :href="route('posts.index')" :active="route().current('posts.index')" v-if="$page.props.permission.users.viewAny">
+                                    Posts
+                                </jet-nav-link>
                             </div>
                         </div>
 
